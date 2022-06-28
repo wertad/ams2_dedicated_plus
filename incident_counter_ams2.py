@@ -3,11 +3,6 @@ import urllib.request
 import requests
 import time
 import subprocess
-'''
-a_file = open("sms_stats_data.json", encoding="utf-8")
-json_object = json.load(a_file)
-a_file.close()
-'''
 
 
 def getLogs():
