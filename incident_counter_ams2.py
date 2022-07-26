@@ -15,10 +15,10 @@ def getLogs():
         errCount = 0
 
         for item in data["response"]["events"]:
-            #if (item["name"] == "State" or item["name"] == "Impact" or item["name"] == "Sector") and (index < item["index"] or item["time"] > server_time):
+            # if (item["name"] == "State" or item["name"] == "Impact" or item["name"] == "Sector") and (index < item["index"] or item["time"] > server_time):
             if (item["name"] == "State" or item["name"] == "Impact" or item["name"] == "Sector") and (index < item["index"]):
                 if item["participantid"] == 0:
-                    if (item["name"] == "Impact"):
+                    if item["name"] == "Impact":
                         if item["attributes"]["CollisionMagnitude"] > 100:
                             if item["attributes"]["OtherParticipantId"] < 0:
                                 requests.post("http://127.0.0.1:9000/api/session/send_chat?message='Incident Counter +2x'")
@@ -37,19 +37,20 @@ def getLogs():
             index = 0
             print("Server is offline, eventid has been reseted.")
 
-subprocess.check_call([r"DedicatedServerCmd.exe"])
-
-stop = False
-index = 0
-server_time = 0
-errCount = 0
-
 
 def executeSomething():
     global stop
 
     getLogs()
     time.sleep(1)
+
+
+subprocess.check_call([r"DedicatedServerCmd.exe"])
+
+stop = False
+index = 0
+server_time = 0
+errCount = 0
 
 
 while not stop:
